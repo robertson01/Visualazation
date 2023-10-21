@@ -8,7 +8,7 @@ x_values = list(range(1, 5001))
 y_values = [x**3 for x in x_values]
 pt.style.use('seaborn-v0_8')
 fix, ax = pt.subplots()
-ax.scatter(x_values, y_values, c='red', s=10)
+ax.scatter(x_values, y_values, c=y_values, cmap=pt.cm.rainbow, s=200)
 
 # Назначение заголовка диаграммы и меток осей
 ax.set_title("График функций", fontsize=24)
