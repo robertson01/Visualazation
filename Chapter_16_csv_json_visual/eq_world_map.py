@@ -9,18 +9,14 @@ with open(filename) as file:
 # readable_file = 'readable_eq_data.json'
 # with open(readable_file, 'w') as f:
 #     json.dump(all_eq_data, f, indent=4)
-
+title = all_eq_data['metadata']['title']
 all_eq_dicts = all_eq_data['features']
 mags, lons, lats, hover_texts = [], [], [], []
 for eq_dict in all_eq_dicts:
-    lon = eq_dict['geometry']['coordinates'][0]
-    lat = eq_dict['geometry']['coordinates'][1]
-    mag = eq_dict['properties']['mag']
-    title = eq_dict['properties']['title']
-    mags.append(mag)
-    lons.append(lon)
-    lats.append(lat)
-    hover_texts.append(title)
+    lons.append(eq_dict['geometry']['coordinates'][0])
+    lats.append(eq_dict['geometry']['coordinates'][1])
+    mags.append(eq_dict['properties']['mag'])
+    hover_texts.append(eq_dict['properties']['title'])
 
 # Нанесения данных на карту
 data = [{
@@ -36,7 +32,7 @@ data = [{
         'colorbar': {'title': 'Magnitude'}
     },
 }]
-my_layout = Layout(title='Global Earthquakes')
+my_layout = Layout(title=title)
 
 fig = {'data': data, 'layout': my_layout}
 offline.plot(fig, filename='global_earthquakes.html')
